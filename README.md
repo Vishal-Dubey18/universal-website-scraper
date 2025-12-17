@@ -235,9 +235,9 @@ Developed for the Lyftr AI full-stack engineering assignment.
 
 ## 👨‍💻 Author
 
-Vishal  
-GitHub: [@yourusername](https://github.com/yourusername)  
-LinkedIn: [Your Profile](https://linkedin.com/in/yourprofile)
+Vishal Dubey
+GitHub: [github.com/Vishal-Dubey18](https://github.com/Vishal-Dubey18)
+LinkedIn: [linkedin.com/in/vishal-dubey-a5268b31b](https://linkedin.com/in/vishal-dubey-a5268b31b)
 
 ---
 
