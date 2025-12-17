@@ -17,7 +17,7 @@ A production-ready web scraper that intelligently extracts structured content fr
 ### Installation & Running
 ```bash
 # Clone repository
-git clone https://github.com/<username>/universal-website-scraper.git
+git clone https://github.com/Vishal-Dubey18/universal-website-scraper.git
 cd universal-website-scraper
 
 # Make run script executable
