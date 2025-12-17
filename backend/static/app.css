@@ -1,0 +1,339 @@
+/* backend/static/app.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ================= HEADER ================= */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: white;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* ================= CARD ================= */
+.card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+/* ================= FORM ================= */
+.scraper-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #333;
+}
+
+.url-input {
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.url-input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.options-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.option-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.option-group label {
+    font-size: 14px;
+    color: #666;
+}
+
+/* ================= BUTTON ================= */
+.scrape-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.scrape-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+}
+
+.scrape-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ================= LOADING ================= */
+.loading {
+    display: none;
+    text-align: center;
+    padding: 20px;
+    color: #667eea;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ================= ERROR ================= */
+.error-box {
+    display: none;
+    background: #ffebee;
+    border-left: 4px solid #f44336;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+    color: #c62828;
+}
+
+/* ================= RESULTS ================= */
+.results-section {
+    display: none;
+}
+
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #eee;
+}
+
+.download-btn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+/* ================= SECTIONS ================= */
+.sections-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.section-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+}
+
+.section-card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.section-header {
+    background: #f8f9fa;
+    padding: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section-header:hover {
+    background: #e9ecef;
+}
+
+.section-title {
+    font-weight: 600;
+    color: #333;
+}
+
+.section-meta {
+    display: flex;
+    gap: 15px;
+    font-size: 12px;
+    color: #666;
+}
+
+.section-type {
+    background: #e3f2fd;
+    padding: 2px 8px;
+    border-radius: 12px;
+    color: #1976d2;
+}
+
+.section-content {
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    background: #fafafa;
+}
+
+.section-content.expanded {
+    padding: 20px;
+    max-height: 1000px;
+}
+
+/* ================= CONTENT ================= */
+.content-preview {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.content-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.detail-box {
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #eee;
+}
+
+.detail-box h4 {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ================= JSON ================= */
+.json-viewer {
+    background: #263238;
+    color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.json-key { color: #80cbc4; }
+.json-string { color: #c3e88d; }
+.json-number { color: #f77669; }
+.json-boolean { color: #ffcb6b; }
+
+/* ================= STATS ================= */
+.stats {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    min-width: 100px;
+}
+
+.stat-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .options-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

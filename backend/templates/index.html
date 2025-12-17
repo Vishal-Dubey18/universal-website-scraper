@@ -1,0 +1,96 @@
+<!-- backend/templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Universal Website Scraper - Lyftr AI Assignment</title>
+
+    <!-- Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- App CSS -->
+    <link rel="stylesheet" href="/static/app.css" />
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🌐 Universal Website Scraper</h1>
+            <p>Lyftr AI Full-stack Assignment (MVP)</p>
+            <p>Scrape static & JavaScript-rendered websites with interactions</p>
+        </div>
+
+        <!-- Form Card -->
+        <div class="card">
+            <form id="scraperForm" class="scraper-form">
+                <div class="form-group">
+                    <label for="urlInput">Website URL</label>
+                    <input
+                        type="url"
+                        id="urlInput"
+                        class="url-input"
+                        placeholder="https://example.com"
+                        value="https://en.wikipedia.org/wiki/Artificial_intelligence"
+                        required
+                    />
+                </div>
+
+                <div class="options-row">
+                    <div class="option-group">
+                        <input type="checkbox" id="useJs" checked />
+                        <label for="useJs">Auto-detect JavaScript content</label>
+                    </div>
+
+                    <div class="option-group">
+                        <label for="maxDepth">Max Depth</label>
+                        <input
+                            type="range"
+                            id="maxDepth"
+                            min="1"
+                            max="5"
+                            value="3"
+                        />
+                        <span id="depthValue">3</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="scrape-btn" id="scrapeBtn">
+                    <i class="fas fa-spider"></i>
+                    Scrape Website
+                </button>
+            </form>
+
+            <!-- Loading -->
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Scraping website… please wait</p>
+            </div>
+
+            <!-- Error -->
+            <div class="error-box" id="errorBox"></div>
+        </div>
+
+        <!-- Results -->
+        <div class="card results-section" id="resultsSection">
+            <div class="results-header">
+                <h2>Scraped Content</h2>
+                <a href="#" class="download-btn" id="downloadBtn">
+                    <i class="fas fa-download"></i>
+                    Download JSON
+                </a>
+            </div>
+
+            <div class="stats" id="stats"></div>
+
+            <div class="sections-container" id="sectionsContainer"></div>
+        </div>
+    </div>
+
+    <!-- App JS -->
+    <script src="/static/app.js"></script>
+</body>
+</html>
