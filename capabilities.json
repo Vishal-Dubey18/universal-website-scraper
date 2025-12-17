@@ -1,0 +1,90 @@
+{
+  "static_scraping": {
+    "implemented": true,
+    "description": "Fast HTML parsing with httpx + BeautifulSoup + lxml",
+    "status": "complete",
+    "features": ["URL validation", "metadata extraction", "noise removal"]
+  },
+  "dynamic_scraping": {
+    "implemented": true,
+    "description": "JavaScript rendering with Playwright browser automation",
+    "status": "complete",
+    "features": ["JS execution", "content waiting", "noise removal"]
+  },
+  "js_fallback": {
+    "implemented": true,
+    "description": "Heuristic-based fallback to Playwright when static scraping detects low content",
+    "status": "complete",
+    "threshold": "400 characters (configurable)"
+  },
+  "section_detection": {
+    "implemented": true,
+    "description": "Semantic sections (main, article, section) with intelligent DIV fallback",
+    "status": "complete",
+    "features": ["Semantic HTML5 landmarks", "DIV heuristics", "deduplication", "skip tiny navs"]
+  },
+  "content_extraction": {
+    "implemented": true,
+    "description": "Structured extraction of headings, text, links, images, lists, tables",
+    "status": "complete",
+    "filtering": "Excludes data: URLs, invalid URLs, noise elements"
+  },
+  "metadata_extraction": {
+    "implemented": true,
+    "description": "Extracts title, description, language, canonical URL",
+    "status": "complete",
+    "sources": ["<title>", "<meta name='description'>", "<link rel='canonical'>", "lang attribute"]
+  },
+  "interaction_handling": {
+    "implemented": true,
+    "description": "Clicks tabs, 'Load more' buttons, handles pagination and infinite scroll",
+    "status": "complete",
+    "features": ["tab clicking", "load button clicking", "pagination following", "infinite scroll"]
+  },
+  "pagination_depth": {
+    "implemented": true,
+    "description": "Supports pagination traversal up to configured max_depth (default 3)",
+    "status": "complete",
+    "configurable": true
+  },
+  "error_resilience": {
+    "implemented": true,
+    "description": "Graceful degradation with detailed error reporting",
+    "status": "complete",
+    "features": ["try-catch error handling", "fallback sections", "error logging"]
+  },
+  "frontend_ui": {
+    "implemented": true,
+    "description": "Responsive web interface with real-time scraping feedback",
+    "status": "complete",
+    "features": ["URL input", "JS toggle", "depth control", "real-time loading", "error display"]
+  },
+  "json_visualization": {
+    "implemented": true,
+    "description": "Display and download scraped content as formatted JSON",
+    "status": "complete",
+    "features": ["section view", "stats display", "JSON download"]
+  },
+  "health_check": {
+    "implemented": true,
+    "description": "/healthz endpoint for service monitoring",
+    "status": "complete"
+  },
+  "api_endpoints": {
+    "GET /": "Frontend HTML UI",
+    "GET /healthz": "Health check with timestamp",
+    "POST /scrape": "Main scraping endpoint with Pydantic validation",
+    "implemented": true
+  },
+  "windows_compatibility": {
+    "implemented": true,
+    "description": "Event loop policy fix for Windows + Playwright compatibility",
+    "status": "complete"
+  },
+  "test_coverage": {
+    "implemented": false,
+    "description": "Unit tests for core modules",
+    "status": "in_progress",
+    "note": "Basic tests available, comprehensive coverage recommended"
+  }
+}

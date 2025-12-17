@@ -66,7 +66,7 @@ def test_basic_scraping():
         import asyncio
 
         async def test():
-            scraper = ScraperEngine('https://httpbin.org/html')
+            scraper = ScraperEngine('https://httpbin.org/html', None, 3)
             result = await scraper.scrape()
             if result.get('sections'):
                 print('✅ Basic scraping works')

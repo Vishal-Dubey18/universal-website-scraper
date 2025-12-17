@@ -8,6 +8,15 @@ from backend.scraper.utils import make_absolute_url
 
 logger = logging.getLogger(__name__)
 
+# === Windows + Playwright Event Loop Fix ===
+import sys
+if sys.platform.startswith("win"):
+    import asyncio
+    try:
+        asyncio.set_event_loop_policy(asyncio.SelectorEventLoopPolicy())
+    except Exception as e:
+        logger.warning(f"Could not set Windows event loop policy: {e}")
+
 
 class DynamicScraper:
     def __init__(self, url: str):
@@ -138,11 +147,11 @@ class DynamicScraper:
 
         clicked: List[str] = []
         selectors = [
-            'button:has-text("Load")',
-            'button:has-text("More")',
-            'button:has-text("Show")',
-            'a:has-text("Load more")',
-            'a:has-text("Show more")',
+            'button:text("Load")',
+            'button:text("More")',
+            'button:text("Show")',
+            'a:text("Load more")',
+            'a:text("Show more")',
         ]
 
         for selector in selectors:
@@ -177,7 +186,9 @@ class DynamicScraper:
                 new_height = await self.page.evaluate("document.body.scrollHeight")
 
                 scrolls += 1
+                # Stop if no new content or hit max attempts
                 if new_height == old_height:
+                    logger.debug(f"Infinite scroll stopped: no height change after {scrolls} attempts")
                     break
             except Exception:
                 break
@@ -189,11 +200,11 @@ class DynamicScraper:
             return
 
         selectors = [
-            'a:has-text("Next")',
+            'a:text("Next")',
             ".next",
             "[rel='next']",
-            'button:has-text("Next")',
-            'a:has-text("»")',
+            'button:text("Next")',
+            'a:text("»")',
         ]
 
         for _ in range(config.MAX_DEPTH - 1):
@@ -213,6 +224,7 @@ class DynamicScraper:
                         current = self.page.url
                         if current not in self.visited_pages:
                             self.visited_pages.append(current)
+                            logger.debug(f"Visited pagination page: {current}")
 
                         found = True
                         break
@@ -220,6 +232,7 @@ class DynamicScraper:
                     continue
 
             if not found:
+                logger.debug(f"No more pagination links found after {len(self.visited_pages)} pages")
                 break
 
     def get_html(self) -> Optional[str]:

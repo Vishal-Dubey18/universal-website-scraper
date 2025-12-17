@@ -1,86 +1,73 @@
-<!-- backend/templates/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Universal Website Scraper - Lyftr AI Assignment</title>
-
-    <!-- Icons -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-
-    <!-- App CSS -->
-    <link rel="stylesheet" href="/static/app.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Website Scraper</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/app.css">
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
+        <!-- Header with Docs Button -->
         <div class="header">
-            <h1>🌐 Universal Website Scraper</h1>
-            <p>Lyftr AI Full-stack Assignment (MVP)</p>
-            <p>Scrape static & JavaScript-rendered websites with interactions</p>
+            <div class="header-top">
+                <h1>🌐 Universal Website Scraper</h1>
+                <a href="/docs" target="_blank" class="docs-btn">
+                    <i class="fas fa-book"></i> API Docs
+                </a>
+            </div>
+            <p>Extract structured content from any website</p>
         </div>
 
-        <!-- Form Card -->
+        <!-- Scraper Form Card -->
         <div class="card">
             <form id="scraperForm" class="scraper-form">
                 <div class="form-group">
-                    <label for="urlInput">Website URL</label>
-                    <input
-                        type="url"
-                        id="urlInput"
-                        class="url-input"
+                    <label for="urlInput">Website URL:</label>
+                    <input 
+                        type="url" 
+                        id="urlInput" 
+                        class="url-input" 
                         placeholder="https://example.com"
-                        value="https://en.wikipedia.org/wiki/Artificial_intelligence"
                         required
-                    />
+                        value="https://en.wikipedia.org/wiki/Artificial_intelligence"
+                    >
                 </div>
 
                 <div class="options-row">
                     <div class="option-group">
-                        <input type="checkbox" id="useJs" checked />
-                        <label for="useJs">Auto-detect JavaScript content</label>
+                        <input type="checkbox" id="useJs" checked>
+                        <label for="useJs">Auto-detect JavaScript</label>
                     </div>
-
                     <div class="option-group">
-                        <label for="maxDepth">Max Depth</label>
-                        <input
-                            type="range"
-                            id="maxDepth"
-                            min="1"
-                            max="5"
-                            value="3"
-                        />
-                        <span id="depthValue">3</span>
+                        <label for="maxDepth">Max Depth:</label>
+                        <div class="range-container">
+                            <input type="range" id="maxDepth" min="1" max="5" value="3">
+                            <span id="depthValue">3</span>
+                        </div>
                     </div>
                 </div>
 
                 <button type="submit" class="scrape-btn" id="scrapeBtn">
-                    <i class="fas fa-spider"></i>
-                    Scrape Website
+                    <i class="fas fa-spider"></i> Scrape Website
                 </button>
             </form>
 
-            <!-- Loading -->
             <div class="loading" id="loading">
                 <div class="spinner"></div>
-                <p>Scraping website… please wait</p>
+                <p>Scraping website...</p>
             </div>
 
-            <!-- Error -->
             <div class="error-box" id="errorBox"></div>
         </div>
 
-        <!-- Results -->
+        <!-- Results Card -->
         <div class="card results-section" id="resultsSection">
             <div class="results-header">
-                <h2>Scraped Content</h2>
+                <h2>Results</h2>
                 <a href="#" class="download-btn" id="downloadBtn">
-                    <i class="fas fa-download"></i>
-                    Download JSON
+                    <i class="fas fa-download"></i> Download JSON
                 </a>
             </div>
 
@@ -88,9 +75,14 @@
 
             <div class="sections-container" id="sectionsContainer"></div>
         </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2024 Universal Website Scraper</p>
+            <p>Scrape any website for structured data</p>
+        </div>
     </div>
 
-    <!-- App JS -->
     <script src="/static/app.js"></script>
 </body>
 </html>

@@ -40,10 +40,10 @@ that works reliably across:
 ### Why Static First?
 
 Static scraping using `httpx + selectolax` is:
-- Extremely fast
-- Memory efficient
-- Reliable for 70–80% of websites
-- Easier to reason about
+ - Extremely fast
+ - Memory efficient
+ - Reliable for 70–80% of websites
+ - Easier to reason about
 
 Launching a browser is **expensive**, so it should only happen when needed.
 

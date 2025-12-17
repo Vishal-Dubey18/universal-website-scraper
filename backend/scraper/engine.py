@@ -7,6 +7,7 @@ from backend.scraper.static_scraper import StaticScraper
 from backend.scraper.dynamic_scraper import DynamicScraper
 from backend.scraper.section_parser import SectionParser
 from backend.scraper.utils import is_valid_url, clean_url
+import asyncio
 
 logger = logging.getLogger(__name__)
 
@@ -26,13 +27,29 @@ class ScraperEngine:
         }
 
     async def scrape(self) -> Dict[str, Any]:
+        """
+        Public scrape entrypoint with a global timeout wrapper.
+        """
+        try:
+            return await asyncio.wait_for(self._scrape_internal(), timeout=config.GLOBAL_TIMEOUT)
+        except asyncio.TimeoutError:
+            self._error("Scraping exceeded global timeout", "timeout")
+            return self.result
+
+    async def _scrape_internal(self) -> Dict[str, Any]:
         if not is_valid_url(self.url):
             self._error("Invalid URL", "validation")
             return self.result
 
         static_ok = await self._static()
 
+        # === JS FALLBACK DECISION LOGIC ===
+        # Trigger dynamic scraping if:
+        # 1. User explicitly requested JS rendering (use_js=True), OR
+        # 2. Static scraping succeeded but extracted very little content (< JS_FALLBACK_MIN_TEXT)
+        # This heuristic-based approach saves resources while handling JS-heavy sites
         if self.use_js or (static_ok and self._low_text()):
+            logger.info("Triggering JS rendering (user request or low content detected)")
             await self._dynamic()
 
         return self.result
@@ -52,12 +69,15 @@ class ScraperEngine:
 
     async def _dynamic(self):
         scraper = DynamicScraper(self.url)
-        if await scraper.fetch():
-            html = scraper.get_html()
-            if html:
-                self.result["sections"] = SectionParser(html, self.url).parse_sections()
-            self.result["interactions"] = await scraper.perform_interactions()
-        await scraper.close()
+        try:
+            if await scraper.fetch():
+                html = scraper.get_html()
+                if html:
+                    self.result["sections"] = SectionParser(html, self.url).parse_sections()
+                self.result["interactions"] = await scraper.perform_interactions()
+        finally:
+            # Guaranteed cleanup of browser resources
+            await scraper.close()
 
     def _low_text(self):
         total = sum(len(s["content"]["text"]) for s in self.result["sections"])
