@@ -1,14 +1,10 @@
-# Python
 __pycache__/
 *.pyc
 venv/
 
-# Environment
 .env
 
-# Logs / Data
 logs/
 data/
 
-# OS
 .DS_Store

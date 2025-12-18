@@ -1,9 +1,3 @@
-Below is a **complete, corrected, production-quality `README.md`** that matches **all the code you shared**, your **Lyftr AI assignment requirements**, and **how evaluators expect it to look**.
-
-You can **copy-paste this directly** as `README.md`.
-
----
-
 # Universal Website Scraper – Lyftr AI Full-Stack Assignment
 
 A production-ready web scraper that intelligently extracts structured content from both static and JavaScript-rendered websites with interactive element support.
@@ -52,27 +46,44 @@ The server starts at **http://localhost:8000**
 
 ## 🏗️ Architecture
 
+The scraper follows a modular, layered architecture designed for scalability, maintainability, and extensibility. It separates concerns into distinct layers: API, scraping engine, and frontend.
+
+### Project Structure
 ```
-universal-website-scraper/
+lyftr-scraper/
 ├── backend/
-│   ├── main.py                 # FastAPI application & endpoints
-│   ├── schemas.py              # Pydantic models for API contracts
-│   ├── config.py               # Centralized configuration
-│   └── scraper/                # Core scraping engine
-│       ├── engine.py           # Orchestrator (static → JS → interactions)
-│       ├── static_scraper.py   # httpx + selectolax for static content
-│       ├── dynamic_scraper.py  # Playwright for JavaScript rendering
-│       ├── section_parser.py   # HTML → structured sections
-│       ├── interactions.py     # Click/scroll/pagination logic
-│       └── utils.py            # URL validation & helpers
-│   ├── templates/              # Jinja2 frontend
-│   └── static/                 # CSS/JS assets
-├── requirements.txt            # Python dependencies
-├── run.sh                     # One-command startup script
-├── README.md                  # This documentation
-├── design_notes.md            # Detailed design decisions
-└── capabilities.json          # Feature implementation checklist
+│   ├── __init__.py
+│   ├── main.py
+│   ├── schemas.py
+│   ├── config.py
+│   ├── scraper/
+│   │   ├── __init__.py
+│   │   ├── engine.py
+│   │   ├── static_scraper.py
+│   │   ├── dynamic_scraper.py
+│   │   ├── section_parser.py
+│   │   ├── interactions.py
+│   │   └── utils.py
+│   ├── templates/
+│   │   └── index.html
+│   └── static/
+│       ├── app.js
+│       └── app.css
+├── requirements.txt
+├── run.sh
+├── README.md
+├── design_notes.md
+├── capabilities.json
+└──.gitignore                 # Git ignore rules
 ```
+
+### Data Flow
+1. **Request Reception**: FastAPI receives scraping requests via `/scrape` endpoint
+2. **Strategy Selection**: Engine analyzes URL and content to choose static vs. dynamic scraping
+3. **Content Extraction**: Appropriate scraper fetches and parses HTML
+4. **Interaction Handling**: Interactions module handles dynamic elements if needed
+5. **Structure Parsing**: Section parser organizes content into semantic sections
+6. **Response Formatting**: Structured data returned as JSON matching assignment schema
 
 ## 📡 API Reference
 
@@ -105,33 +116,21 @@ curl -X POST http://localhost:8000/scrape \
 
 **Response:** Returns structured JSON matching the exact assignment schema.
 
-## 🧪 Tested Websites
+## Test URLs
 
-This scraper was thoroughly tested with three primary URLs:
+The scraper was tested with these three primary URLs:
 
-### 1. **Wikipedia** – Static Content
-```
-https://en.wikipedia.org/wiki/Artificial_intelligence
-```
-- Tests static HTML parsing
-- Semantic section detection
-- Table and list extraction
+1. **Wikipedia (Static Content)**
+   - URL: `https://en.wikipedia.org/wiki/Artificial_intelligence`
+   - Purpose: Tests static scraping, section detection, content parsing
 
-### 2. **Vercel** – JavaScript-Heavy with Tabs
-```
-https://vercel.com
-```
-- Tests Playwright JS rendering
-- Tab interaction handling
-- Dynamic content extraction
+2. **Vercel (JavaScript-Heavy with Tabs)**
+   - URL: `https://vercel.com`
+   - Purpose: Tests JS rendering fallback and tab interaction handling
 
-### 3. **Hacker News** – Pagination & "Load More"
-```
-https://news.ycombinator.com
-```
-- Tests pagination to depth ≥ 3
-- "More" button clicking
-- List item extraction
+3. **Hacker News (Pagination / Load More)**
+   - URL: `https://news.ycombinator.com`
+   - Purpose: Tests pagination to depth ≥ 3 and "More" button clicking
 
 ## ⚙️ Configuration
 

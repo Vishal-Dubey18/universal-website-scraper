@@ -27,9 +27,6 @@ class ScraperEngine:
         }
 
     async def scrape(self) -> Dict[str, Any]:
-        """
-        Public scrape entrypoint with a global timeout wrapper.
-        """
         try:
             return await asyncio.wait_for(self._scrape_internal(), timeout=config.GLOBAL_TIMEOUT)
         except asyncio.TimeoutError:
@@ -43,11 +40,6 @@ class ScraperEngine:
 
         static_ok = await self._static()
 
-        # === JS FALLBACK DECISION LOGIC ===
-        # Trigger dynamic scraping if:
-        # 1. User explicitly requested JS rendering (use_js=True), OR
-        # 2. Static scraping succeeded but extracted very little content (< JS_FALLBACK_MIN_TEXT)
-        # This heuristic-based approach saves resources while handling JS-heavy sites
         if self.use_js or (static_ok and self._low_text()):
             logger.info("Triggering JS rendering (user request or low content detected)")
             await self._dynamic()
