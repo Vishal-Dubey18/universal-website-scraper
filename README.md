@@ -1,6 +1,26 @@
+<div align="center">
+  <img src="docs/images/logo.svg" alt="Universal Website Scraper Logo" width="150">
+</div>
+
 # Universal Website Scraper – Lyftr AI Full-Stack Assignment
 
 A production-ready web scraper that intelligently extracts structured content from both static and JavaScript-rendered websites with interactive element support.
+
+## 📖 Table of Contents
+- [🚀 Quick Start](#-quick-start)
+- [✨ Features](#-features)
+- [🏗️ Architecture](#️-architecture)
+- [📡 API Reference](#-api-reference)
+- [Test URLs](#test-urls)
+- [⚙️ Configuration](#️-configuration)
+- [🔍 How It Works](#-how-it-works)
+- [🛠️ Tech Stack](#️-tech-stack)
+- [📄 Documentation](#-documentation)
+- [🐛 Troubleshooting](#-troubleshooting)
+- [📈 Performance](#-performance)
+- [🤝 Contributing](#-contributing)
+- [📝 License](#-license)
+- [👨‍💻 Author](#-author)
 
 ## 🚀 Quick Start
 
@@ -235,8 +255,8 @@ Developed for the Lyftr AI full-stack engineering assignment.
 ## 👨‍💻 Author
 
 Vishal Dubey
-GitHub: [github.com/Vishal-Dubey18](https://github.com/Vishal-Dubey18)
-LinkedIn: [linkedin.com/in/vishal-dubey-a5268b31b](https://linkedin.com/in/vishal-dubey-a5268b31b)
+- GitHub: [@Vishal-Dubey18](https://github.com/Vishal-Dubey18)
+- LinkedIn: [Vishal Dubey](https://www.linkedin.com/in/vishal-dubey-a5268b31b)
 
 ---
 
